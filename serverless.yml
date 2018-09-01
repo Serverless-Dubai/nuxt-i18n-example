@@ -1,0 +1,27 @@
+service: serverless-nuxt-i18n-example # NOTE: update this with your service name
+app: nuxt
+tenant: rtsrob
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${self:custom.secrets.NODE_ENV}
+  region: eu-west-2
+  environment:
+    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+
+functions:
+  nuxt:
+    handler: index.nuxt
+    events:
+      - http: ANY /
+      - http: ANY /{proxy+}
+
+plugins:
+  - serverless-apigw-binary
+
+custom:
+  secrets: ${file(secrets.json)}
+  apigwBinary:
+    types:
+      - "*/*"
