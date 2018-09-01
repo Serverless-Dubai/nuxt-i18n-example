@@ -9,3 +9,10 @@ npm-debug.log
 
 # Nuxt generate
 dist
+
+# Serverless
+.serverless
+
+# macOS
+.DS_Store
+
